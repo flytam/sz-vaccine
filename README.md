@@ -38,6 +38,7 @@ npm install
 -   receives 收件人邮箱，string[]
 -   interval 时间间隔。单位秒
 -   token 查询 token
+-   cooldownTime 查到有余量后，查询的冷却时间
 
 ```json
 {
@@ -47,7 +48,8 @@ npm install
     "receives": ["xx@qq.com"],
     "passCode": "xxxx",
     "token": "-t-xxxx",
-    "interval": 30
+    "interval": 30,
+    "cooldownTime": 3600
 }
 ```
 

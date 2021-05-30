@@ -72,21 +72,36 @@ const check = (region, corp) =>
         `
             console.log(msg)
             email_1.sendEmail(msg)
-        } else {
-            console.log(
-                `查询完成：${date.toLocaleString()} ${region} ${corp}: 暂时无疫苗`
-            )
+            return true
         }
+        console.log(
+            `查询完成：${date.toLocaleString()} ${region} ${corp}: 暂时无疫苗`
+        )
+        return false
     })
-const task = () =>
+const task = (params) =>
     __awaiter(void 0, void 0, void 0, function* () {
-        for (let region of config_1.default.region) {
-            for (let corp of config_1.default.corp) {
-                yield check(region, corp)
+        for (const [reigon, corp] of params) {
+            const hasVaccine = yield check(reigon, corp)
+            if (hasVaccine) {
+                setTimeout(() => {
+                    task(params)
+                }, config_1.default.cooldownTime * 1000)
+                return
             }
         }
         setTimeout(() => {
-            task()
+            task(params)
         }, config_1.default.interval * 1000)
     })
-task()
+const generateTaskParams = (config) => {
+    const taskParams = []
+    for (let region of config.region) {
+        for (let corp of config.corp) {
+            taskParams.push([region, corp])
+        }
+    }
+    return taskParams
+}
+const taskParams = generateTaskParams(config_1.default)
+task(taskParams)
