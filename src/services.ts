@@ -13,6 +13,8 @@ const instance = axios.create({
         token: config.token,
         appId: 'app569d18f5',
         selfappid: 'wx5402a9708b90332e',
+        'user-agent':
+            'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
     },
 })
 
@@ -68,7 +70,7 @@ export const getNum = async ({
     formData.append('areaCode', areaCode)
     formData.append('bactCode', bactCode)
     formData.append('pageNum', 1)
-    formData.append('numPerPage', 100)
+    formData.append('numPerPage', 10)
     formData.append('corpCode', corpCode)
 
     return instance

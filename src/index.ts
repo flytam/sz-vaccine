@@ -21,12 +21,10 @@ const check = async (region: string, corp: string): Promise<boolean> => {
     if (ans.length > 0) {
         const msg = `查询完成：${date.toLocaleString()} ${area?.NAME} ${
             target?.corpName
-        }: 有疫苗了
-                    ${ans.reduce((str, item) => str + `${item.outpName}\n`, '')}
+        }: 有疫苗
         `
         console.log(msg)
-
-        sendEmail(msg)
+        sendEmail(ans.map((x) => x.outpName))
         return true
     }
     console.log(
@@ -55,8 +53,8 @@ const task = async (params: [string, string][]) => {
 
 const generateTaskParams = (config: Config): [string, string][] => {
     const taskParams: [string, string][] = []
-    for (let region of config.region) {
-        for (let corp of config.corp) {
+    for (const region of config.region) {
+        for (const corp of config.corp) {
             taskParams.push([region, corp])
         }
     }
