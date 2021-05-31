@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-interface Config {
+export interface Config {
     region: string[]
     corp: string[]
     email: string
@@ -9,6 +9,7 @@ interface Config {
     token: string
     interval: number
     receives: string[]
+    cooldownTime: number
 }
 
 const config: Config = JSON.parse(

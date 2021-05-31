@@ -4,5 +4,6 @@
     "email": "xxxx@qq.com",
     "receives": [],
     "passCode": "xxxx",
-    "interval": 30
+    "interval": 30,
+    "cooldownTime": 3600
 }
