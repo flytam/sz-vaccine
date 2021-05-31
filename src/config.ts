@@ -12,10 +12,18 @@ export interface Config {
     cooldownTime: number
 }
 
+const defaultConfig: Partial<Config> = {
+    interval: 30,
+    cooldownTime: 3600,
+}
+
 const config: Config = JSON.parse(
     fs.readFileSync(path.resolve(__dirname, '../config.json'), {
         encoding: 'utf-8',
     })
 )
 
-export default config
+export default {
+    ...defaultConfig,
+    ...config,
+}

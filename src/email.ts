@@ -16,8 +16,6 @@ export const sendEmail = (msg: string) => {
     const mail = {
         // 发件人 邮箱  '昵称<发件人邮箱>'
         from: `"疫苗通知"<${config.email}>`,
-        // 主题
-        subject: msg,
         // 收件人 的邮箱 可以是其他邮箱 不一定是qq邮箱
         to: config.receives.join(','),
         html: msg,

@@ -46,7 +46,7 @@ const email_1 = require('./email')
 const check = (region, corp) =>
     __awaiter(void 0, void 0, void 0, function* () {
         const areaList = yield services_1.getAreaList()
-        const area = areaList.find((x) => new RegExp(region).test(region))
+        const area = areaList.find((x) => new RegExp(region).test(x.NAME))
         const corpList = yield services_1.getVaccineCorpList()
         // 科兴中维
         const target = corpList.find((x) => x.corpName === corp)
@@ -59,23 +59,26 @@ const check = (region, corp) =>
                     : target.corpCode) || '',
             bactCode: '5601',
         })
-        const ans = list.filter((x) => x.nums > -1)
+        const ans = list.filter((x) => x.status === '1' && x.nums > 0)
         const date = new Date()
         if (ans.length > 0) {
-            const msg = `查询完成：${date.toLocaleString()} ${region} ${corp}: 有疫苗了
-                    ${ans.reduce(
-                        (str, item) =>
-                            str +
-                            `${item.outpName},${item.outpIntroduction},数量：${item.nums}\n`,
-                        ''
-                    )}
+            const msg = `查询完成：${date.toLocaleString()} ${
+                area === null || area === void 0 ? void 0 : area.NAME
+            } ${
+                target === null || target === void 0 ? void 0 : target.corpName
+            }: 有疫苗了
+                    ${ans.reduce((str, item) => str + `${item.outpName}\n`, '')}
         `
             console.log(msg)
             email_1.sendEmail(msg)
             return true
         }
         console.log(
-            `查询完成：${date.toLocaleString()} ${region} ${corp}: 暂时无疫苗`
+            `查询完成：${date.toLocaleString()} ${
+                area === null || area === void 0 ? void 0 : area.NAME
+            } ${
+                target === null || target === void 0 ? void 0 : target.corpName
+            }: 暂时无疫苗`
         )
         return false
     })
