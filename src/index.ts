@@ -21,10 +21,10 @@ const check = async (region: string, corp: string): Promise<boolean> => {
     if (ans.length > 0) {
         const msg = `查询完成：${date.toLocaleString()} ${area?.NAME} ${
             target?.corpName
-        }: 有疫苗
+        }: 有疫苗。${ans.map((x) => `${x.outpName} 数量: ${x.nums}`)}
         `
         console.log(msg)
-        sendEmail(ans.map((x) => x.outpName))
+        sendEmail(ans.map((x) => `${x.outpName} 数量: ${x.nums}`))
         return true
     }
     console.log(
