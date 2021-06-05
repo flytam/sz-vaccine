@@ -27,7 +27,9 @@ npm install
 
 1. 获取邮箱授权码用于发送有号通知。如 QQ 邮箱的获取方式[参考](https://service.mail.qq.com/cgi-bin/help?subtype=1&id=28&no=1001256)
 
-2. 获取查询 token。微信公众号「深圳疾控」->「打疫苗」->「个人预约新冠疫苗」->「下一步」->「个人预约」。点击手机右上角的三个点，复制链接，把 url 上的 token 取出来。这个 token 是一个`-t-`开头的字符串
+2. 获取查询 token。微信公众号「深圳疾控」->「打疫苗」->「个人预约新冠疫苗」->「下一步」->「个人预约」。点击手机右上角的三个点，复制链接，~~把 url 上的 token 取出来。这个 token 是一个`-t-`开头的字符串~~（6.5 更新），浏览器打开复制出来的 url，F12 打开 console，输入`window.getUrlArgObject("token")`拿到 token
+
+![image](https://user-images.githubusercontent.com/20512530/120893876-017f5880-c648-11eb-955d-d4258b5ee20b.png)
 
 3. 在项目根目录新建一个`config.json`如下，样例和字段说明
 
